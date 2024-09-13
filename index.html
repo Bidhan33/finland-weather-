@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather Assignment 1</title>
+  </head>
+  <body>
+    <div id="root"></div>
+      <!-- Root container for react components -->
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Weather() {
+        const [weatherinfo, setWeatherInfo] = React.useState(0);
+
+        React.useEffect(() => {
+          fetch("https://api.openweathermap.org/data/2.5/weather?lat=60.16&lon=25.74&appid=2ebf9086b922737bbe2646689c457126&units=metric")
+            .then((response) => {
+              if (!response.ok) throw new Error("Something went wrong " + response.statusText);
+              return response.json();
+            })
+            .then((data) => setWeatherInfo(data))
+            .catch((error) => console.error(error));
+        }, []);
+
+        if (!weatherinfo) {
+          return <p>Loading weather data...</p>;
+        }
+
+        const { main, weather } = weatherinfo;
+        const temp = main.temp;
+        const condition = weather[0].description;
+        const weatherIcon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+
+        return (
+          <React.Fragment>
+            <h3>Current Weather of Helsinki Finland</h3>
+            <p>Temperature: {temp} °C</p>
+            <p>Weather: {condition}</p>
+            <img src={weatherIcon} alt={condition} />
+          </React.Fragment>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Weather />);
+    </script>
+  </body>
+</html>
