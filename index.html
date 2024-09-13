@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <title>Weather Assignment 1</title>
     <link rel="stylesheet" type="text/css" href="demo.css" />
+    <style>
+      
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -41,11 +44,12 @@
           <React.Fragment>
             <marquee behavior="alternate" BGCOLOR= "Green" >⚠ Important Notice: Weather Alert &#9888; </marquee>
           
-           
+           <div className="weather-box">
             <h3>Current Weather of Helsinki Finland</h3>
             <p>Temperature: {temp} °C</p>
             <p>Weather: {condition}</p>
             <img src={weatherIcon} alt={condition} />
+            </div>
             <p class="marquee marquee2">
             <span> Always Carry an Umbrella! ☔️
 
