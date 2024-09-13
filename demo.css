@@ -1,0 +1,57 @@
+/* For the marquee container */
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%; /* Full width */
+  background-color: rgb(244, 16, 16); /* Background color */
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  /* Ensure text shadow is removed for clear text */
+  text-shadow: none;
+}
+
+/* Marquee scrolling effect */
+.marquee span {
+  display: inline-block;
+  animation: marquee 30s linear infinite; /* Faster scrolling */
+  background: linear-gradient(90deg, #0d0909, #020118); /* Gradient background */
+  -webkit-background-clip: text; /* Clipping background to text */
+  color: transparent; /* Hide the actual text color to show gradient */
+  white-space: nowrap;
+  /* Smooth transition to avoid blurriness */
+  will-change: transform;
+}
+
+/* Keyframes for scrolling */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* Start from right */
+    filter: blur(0); /* Start with blur */
+  }
+  50% {
+    transform: translateX(0); /* Middle point */
+    filter: blur(0); /* Clear text */
+  }
+  100% {
+    transform: translateX(-100%); /* Move to left */
+    filter: blur(0); /* Clear text */
+  }
+}
+
+/* Ensure body takes full height for absolute positioning */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
