@@ -68,6 +68,7 @@ body {
   justify-content: space-between;
 }
 /* Styling for the weather info box */
+/* Styling for the weather info box */
 .weather-box {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
     border-radius: 15px; /* Rounded corners */
@@ -76,8 +77,39 @@ body {
     width: 80%; /* Adjust width as needed */
     max-width: 500px; /* Max width for larger screens */
     text-align: center; /* Center text */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Initial shadow for depth */
     color: #fff; /* Text color */
+    border: 2px solid transparent; /* Transparent border initially */
+    transition: all 0.4s ease; /* Smooth transition for hover effect */
+    position: relative; /* For inner glow effect */
+    overflow: hidden; /* Hide the inner shadow overflow */
+  }
+  
+  /* Hover effect for the weather box with a stronger glow */
+  .weather-box:hover {
+    border-color: #00ffcc; /* Border color changes to teal */
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.8), /* Outer glow */
+                0 0 30px rgba(0, 255, 204, 0.6), /* Larger outer glow */
+                0 0 45px rgba(0, 255, 204, 0.4); /* Further glowing effect */
+    transform: scale(1.03); /* Slight scale effect */
+  }
+  
+  /* Inner glow effect */
+  .weather-box:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 204, 0.3), transparent 70%);
+    z-index: -1;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+  
+  .weather-box:hover:before {
+    opacity: 1; /* Show inner glow when hovered */
   }
   
   /* Styling for weather details */
