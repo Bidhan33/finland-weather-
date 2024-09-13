@@ -67,3 +67,43 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+/* Styling for the weather info box */
+.weather-box {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the box */
+    margin: 20px auto; /* Centered with margin */
+    width: 80%; /* Adjust width as needed */
+    max-width: 500px; /* Max width for larger screens */
+    text-align: center; /* Center text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    color: #fff; /* Text color */
+  }
+  
+  /* Styling for weather details */
+  .weather-box h3 {
+    font-size: 28px; /* Larger heading */
+    margin-bottom: 10px; /* Space below heading */
+  }
+  
+  .weather-box p {
+    font-size: 24px; /* Larger text for details */
+    margin: 5px 0; /* Space above and below text */
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 600px) {
+    .weather-box {
+      width: 95%; /* Full width on small screens */
+      padding: 10px; /* Adjust padding */
+    }
+  
+    .weather-box h3 {
+      font-size: 24px; /* Smaller heading */
+    }
+  
+    .weather-box p {
+      font-size: 20px; /* Smaller text */
+    }
+  }
+  
