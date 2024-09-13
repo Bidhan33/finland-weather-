@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Weather Assignment 1</title>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
   </head>
   <body>
     <div id="root"></div>
@@ -11,6 +12,7 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    
 
     <script type="text/babel">
       function Weather() {
@@ -38,10 +40,17 @@
         return (
           <React.Fragment>
             <marquee behavior="alternate" BGCOLOR= "Green" >⚠ Important Notice: Weather Alert &#9888; </marquee>
+          
+           
             <h3>Current Weather of Helsinki Finland</h3>
             <p>Temperature: {temp} °C</p>
             <p>Weather: {condition}</p>
             <img src={weatherIcon} alt={condition} />
+            <p class="marquee marquee2">
+            <span> Always Carry an Umbrella! ☔️
+
+              Rain or shine, it’s smart to be prepared. An umbrella can keep you dry on unexpected rainy days and provide shade when it’s sunny. Stay comfortable and ready for anything! &nbsp;</span>
+            </p>
             
           </React.Fragment>
         );
