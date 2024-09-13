@@ -1,4 +1,16 @@
 /* For the marquee container */
+/* Background image styling */
+body {
+    background: url('sky-clouds-background_1127-3849.jpg') no-repeat center center fixed;
+    background-size: cover; /* Cover the entire viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    height: 100%;
+    color: white; /* Ensure text is visible */
+  }
+  
 .marquee {
   margin: 0 auto;
   white-space: nowrap;
