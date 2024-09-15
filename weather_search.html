@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather Assignment 2</title>
+    <link rel="stylesheet" type="text/css" href="demo1.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Root container for React components -->
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Weather() {
+        const [weatherinfo, setWeatherInfo] = React.useState(null);
+        const [city, setCity] = React.useState('');
+
+        const fetchWeatherData = () => {
+          if (!city) return; 
+
+          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=2ebf9086b922737bbe2646689c457126&units=metric`)
+            .then((response) => {
+              if (!response.ok) {
+                setWeatherInfo(null);
+                return;
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data) {
+                setWeatherInfo(data);
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+              setWeatherInfo(null);
+            });
+        };
+
+        const buttonhandler = () => {
+          fetchWeatherData();
+        };
+
+        const inputhandler = (event) => {
+          setCity(event.target.value);
+        };
+
+        return (
+          <React.Fragment>
+            <h1 className="main-heading">Current Weather</h1>
+            <div id="search">
+              <svg viewBox="0 0 420 60" xmlns="http://www.w3.org/2000/svg">
+                <rect className="bar"/>
+                <g className="magnifier">
+                  <circle className="glass"/>
+                  <line className="handle" x1="32" y1="32" x2="44" y2="44"></line>
+                </g>
+                <g className="sparks">
+                  <circle className="spark"/>
+                  <circle className="spark"/>
+                  <circle className="spark"/>
+                </g>
+                <g className="burst pattern-one">
+                  <circle className="particle circle"/>
+                  <path className="particle triangle"/>
+                  <circle className="particle circle"/>
+                  <path className="particle plus"/>
+                  <rect className="particle rect"/>
+                  <path className="particle triangle"/>
+                </g>
+                <g className="burst pattern-two">
+                  <path className="particle plus"/>
+                  <circle className="particle circle"/>
+                  <path className="particle triangle"/>
+                  <rect className="particle rect"/>
+                  <circle className="particle circle"/>
+                  <path className="particle plus"/>
+                </g>
+                <g className="burst pattern-three">
+                  <circle className="particle circle"/>
+                  <rect className="particle rect"/>
+                  <path className="particle plus"/>
+                  <path className="particle triangle"/>
+                  <rect className="particle rect"/>
+                  <path className="particle plus"/>
+                </g>
+              </svg>
+              <input
+                type="text"
+                value={city}
+                onChange={inputhandler}
+                placeholder="Enter city"
+                aria-label="Search for inspiration"
+              />
+            </div>
+            <button 
+              onClick={buttonhandler}
+              className="get-weather-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 animate__animated animate__pulse animate__infinite"
+              >
+              Get Weather
+            </button>
+
+            {weatherinfo && (
+              <React.Fragment>
+                <div className="weather-box">
+                <h3>Weather in {weatherinfo.name}</h3>
+                <p>Temperature: {weatherinfo.main.temp} °C</p>
+                <p>Weather: {weatherinfo.weather[0].description}</p>
+                <img 
+                  src={`https://openweathermap.org/img/wn/${weatherinfo.weather[0].icon}@2x.png`} 
+                  alt={weatherinfo.weather[0].description} 
+                />
+                </div>
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Weather />);
+    </script>
+  </body>
+</html>

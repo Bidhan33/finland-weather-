@@ -1,0 +1,448 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    min-height: 100vh;
+  }
+  
+  body {
+    background: url('sky-clouds-background_1127-3849.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: grid;
+    grid-template:
+      "search" minmax(300px, 50vh)
+      "results" minmax(20%, auto)
+      / 1fr;
+    margin: 0;
+    font: 24px/1.5 system-ui, sans-serif;
+    color: white;
+  }
+  
+  h3 {
+    color: #00C1FC;
+  }
+  
+  #search {
+    display: grid;
+    grid-area: search;
+    grid-template:
+      "search" 60px
+      / 420px;
+    justify-content: center;
+    align-content: center;
+    justify-items: stretch;
+    align-items: stretch;
+    background: hsl(0, 0%, 99%);
+    border-radius: 25px;
+    padding: 20px;
+  }
+  
+  #search input {
+    display: block;
+    grid-area: search;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: none;
+    padding: 0 30px 0 60px;
+    border: none;
+    border-radius: 100px;
+    font: 24px/1 system-ui, sans-serif;
+    outline-offset: -8px;
+  }
+  
+  #search svg {
+    grid-area: search;
+    overflow: visible;
+    color: hsl(215, 100%, 50%);
+    fill: none;
+    stroke: currentColor;
+  }
+  
+  .spark {
+    fill: currentColor;
+    stroke: none;
+    r: 15;
+  }
+  
+  .burst {
+    stroke-width: 3;
+  }
+  
+  .burst :nth-child(2n) { color: #ff783e }
+  .burst :nth-child(3n) { color: #ffab00 }
+  .burst :nth-child(4n) { color: #55e214 }
+  .burst :nth-child(5n) { color: #82d9f5 }
+  
+  .circle {
+    r: 6;
+  }
+  
+  .rect {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .triangle {
+    d: path("M0,-6 L7,6 L-7,6 Z");
+    stroke-linejoin: round;
+  }
+  
+  .plus {
+    d: path("M0,-5 L0,5 M-5,0L 5,0");
+    stroke-linecap: round;
+  }
+  
+  .bar {
+    width: 100%;
+    height: 100%;
+    ry: 50%;
+    stroke-width: 10;
+    animation: bar-in 900ms 3s both;
+  }
+  
+  .magnifier {
+    animation: magnifier-in 600ms 3.6s both;
+    transform-box: fill-box;
+  }
+  
+  .magnifier .glass {
+    cx: 27;
+    cy: 27;
+    r: 8;
+    stroke-width: 3;
+  }
+  .magnifier .handle {
+    x1: 32;
+    y1: 32;
+    x2: 44;
+    y2: 44;
+    stroke-width: 3;
+  }
+  
+  @keyframes spark-radius {
+    0% { r: 0; animation-timing-function: cubic-bezier(0, 0.3, 0, 1.57) }
+    30% { r: 15; animation-timing-function: cubic-bezier(1, -0.39, 0.68, 1.04) }
+    95% { r: 8 }
+    99% { r: 10 }
+    99.99% { r: 7 }
+    100% { r: 0 }
+  }
+  
+  @keyframes magnifier-in {
+    0% { transform: translate(20px, 8px) rotate(-45deg) scale(0.01, 0.01); }
+    50% { transform: translate(-4px, 8px) rotate(-45deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+  }
+  
+  /* Fizzy Button Styling */
+  .button_container {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  input {
+    display: none;
+  }
+  
+  input:checked + label .button_inner {
+    background: transparent;
+    transform: rotate(90deg);
+    width: 100px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 0px 440px rgba(0, 0, 0, 0);
+    animation: finalbox 0.4s 4.42s cubic-bezier(0.39, 2.01, 0.27, 0.75) forwards;
+  }
+  
+  .tick {
+    position: absolute;
+    left: 2px;
+    right: 0;
+    transform: scale(0) rotate(-90deg);
+    color: #00C1FC;
+    top: 11px;
+    margin: auto;
+    font-size: 22px;
+  }
+  
+  .button_inner {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 2px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s, box-shadow 0.2s, transform 0.2s;
+  }
+  
+  .button_inner span.t {
+    position: relative;
+    top: 6px;
+    opacity: 1;
+    left: -10px;
+    transition: left 0.4s 0.1s;
+  }
+  
+  .b_l_quad {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+  
+  .button_spots {
+    position: absolute;
+    border-radius: 50%;
+    background: green;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    animation: spew 1s forwards, rotate 4s linear infinite;
+  }
+  
+  @keyframes tick {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes spew {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes finalbox {
+    to {
+      box-shadow: 0 0 0 0px rgba(0, 0, 0, 0);
+      border-radius: 100px;
+    }
+  }
+  
+  /* Weather Result Section */
+  #results {
+    grid-area: results;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+    color: black;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+  }
+  
+  #search {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  
+  .get-weather-btn {
+    font-size: 1.5rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .get-weather-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: all 0.4s;
+  }
+  
+  .get-weather-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #fad0c4 0%, #ff9a9e 99%, #ff9a9e 100%);
+  }
+  
+  .get-weather-btn:hover::before {
+    left: 100%;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .get-weather-btn {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Rainbow text effect for the button */
+  @keyframes rainbow {
+    0% { color: #ff0000; }
+    14% { color: #ff7f00; }
+    28% { color: #ffff00; }
+    42% { color: #00ff00; }
+    57% { color: #0000ff; }
+    71% { color: #8b00ff; }
+    85% { color: #ff00ff; }
+    100% { color: #ff0000; }
+  }
+  
+  .get-weather-btn:hover {
+    animation: rainbow 5s linear infinite;
+  }
+  
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+  }
+  
+  @keyframes colorChange {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .weather-box {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: colorChange 15s ease infinite, float 6s ease-in-out infinite;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .weather-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .weather-box:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+  }
+  
+  .weather-box:hover::before {
+    opacity: 1;
+    animation: pulse 2s infinite;
+  }
+  
+  .weather-box h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .weather-box p {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .weather-box p:hover {
+    transform: translateX(5px);
+  }
+  
+  .weather-box img {
+    width: 120px;
+    height: 120px;
+    margin: 15px auto;
+    display: block;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+  }
+  
+  .weather-box img:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* Add this to your existing button styles */
+  .get-weather-btn {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .get-weather-btn:hover {
+    background: linear-gradient(45deg, #fad0c4 0%, #ff9a9e 99%, #ff9a9e 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  
