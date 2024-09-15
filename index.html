@@ -4,23 +4,21 @@
     <meta charset="UTF-8" />
     <title>Weather Assignment 1</title>
     <link rel="stylesheet" type="text/css" href="demo.css" />
-    <style>
-      
-    </style>
   </head>
   <body>
     <div id="root"></div>
-      <!-- Root container for react components -->
 
+    <!-- Root container for react components -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
-    
 
     <script type="text/babel">
       function Weather() {
-        const [weatherinfo, setWeatherInfo] = React.useState(0);
+        const [weatherinfo, setWeatherInfo] = React.useState(null);
+        const [isLoading, setIsLoading] = React.useState(false); // State for loading screen
 
+        // Fetch weather data from OpenWeather API
         React.useEffect(() => {
           fetch("https://api.openweathermap.org/data/2.5/weather?lat=60.16&lon=25.74&appid=2ebf9086b922737bbe2646689c457126&units=metric")
             .then((response) => {
@@ -30,6 +28,14 @@
             .then((data) => setWeatherInfo(data))
             .catch((error) => console.error(error));
         }, []);
+
+        // Function to simulate loading and redirect
+        const handleSearchClick = () => {
+          setIsLoading(true); // Show loading screen
+          setTimeout(() => {
+            window.location.href = 'weather_search.html'; // Redirect after 2 seconds
+          }, 2000);
+        };
 
         if (!weatherinfo) {
           return <p>Loading weather data...</p>;
@@ -42,20 +48,38 @@
 
         return (
           <React.Fragment>
-            <marquee behavior="alternate" BGCOLOR= "Green" >⚠ Important Notice: Weather Alert &#9888; </marquee>
-          
-           <div className="weather-box">
-            <h3>Current Weather of Helsinki Finland</h3>
-            <p>Temperature: {temp} °C</p>
-            <p>Weather: {condition}</p>
-            <img src={weatherIcon} alt={condition} />
-            </div>
-            <p class="marquee marquee2">
-            <span> Always Carry an Umbrella! ☔️
+            <marquee behavior="alternate" BGCOLOR="Green">
+              ⚠ Important Notice: Weather Alert &#9888;
+            </marquee>
 
-              Rain or shine, it’s smart to be prepared. An umbrella can keep you dry on unexpected rainy days and provide shade when it’s sunny. Stay comfortable and ready for anything! &nbsp;</span>
-            </p>
-            
+            {/* Conditional rendering of loading screen */}
+            {isLoading ? (
+              <div className="loading-screen">
+                <div className="loader"></div>
+                <p>Loading, please wait...</p>
+              </div>
+            ) : (
+              <div>
+                <div className="weather-box">
+                  <h3>Current Weather of Helsinki, Finland</h3>
+                  <p>Temperature: {temp} °C</p>
+                  <p>Weather: {condition}</p>
+                  <img src={weatherIcon} alt={condition} />
+                </div>
+
+                {/* Search button */}
+                <button
+                  className="animated-button"
+                  onClick={handleSearchClick}
+                >
+                  Search Weather
+                </button>
+
+                <p className="marquee">
+                  <span>Always Carry an Umbrella! ☔️ Rain or shine, it’s smart to be prepared. Stay comfortable and ready for anything! &nbsp;</span>
+                </p>
+              </div>
+            )}
           </React.Fragment>
         );
       }
