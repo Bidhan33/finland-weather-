@@ -1,16 +1,16 @@
-/* For the marquee container */
 /* Background image styling */
 body {
-    background: url('sky-clouds-background_1127-3849.jpg') no-repeat center center fixed;
-    background-size: cover; /* Cover the entire viewport */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0;
-    height: 100%;
-    color: white; /* Ensure text is visible */
-  }
-  
+  background: url('sky-clouds-background_1127-3849.jpg') no-repeat center center fixed;
+  background-size: cover; /* Cover the entire viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  height: 100%;
+  color: white; /* Ensure text is visible */
+}
+
+/* Styling for the marquee */
 .marquee {
   margin: 0 auto;
   white-space: nowrap;
@@ -24,118 +24,124 @@ body {
   color: #fff;
   font-size: 24px;
   font-weight: bold;
-  /* Ensure text shadow is removed for clear text */
   text-shadow: none;
 }
 
 /* Marquee scrolling effect */
 .marquee span {
   display: inline-block;
-  animation: marquee 30s linear infinite; /* Faster scrolling */
-  background: linear-gradient(90deg, #0d0909, #020118); /* Gradient background */
-  -webkit-background-clip: text; /* Clipping background to text */
-  color: transparent; /* Hide the actual text color to show gradient */
+  animation: marquee 30s linear infinite;
+  background: linear-gradient(90deg, #0d0909, #020118);
+  -webkit-background-clip: text;
+  color: transparent;
   white-space: nowrap;
-  /* Smooth transition to avoid blurriness */
-  will-change: transform;
 }
 
-/* Keyframes for scrolling */
 @keyframes marquee {
   0% {
-    transform: translateX(100%); /* Start from right */
-    filter: blur(0); /* Start with blur */
-  }
-  50% {
-    transform: translateX(0); /* Middle point */
-    filter: blur(0); /* Clear text */
+    transform: translateX(100%);
   }
   100% {
-    transform: translateX(-100%); /* Move to left */
-    filter: blur(0); /* Clear text */
+    transform: translateX(-100%);
   }
 }
 
-/* Ensure body takes full height for absolute positioning */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-/* Styling for the weather info box */
 /* Styling for the weather info box */
 .weather-box {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
-    border-radius: 15px; /* Rounded corners */
-    padding: 20px; /* Spacing inside the box */
-    margin: 20px auto; /* Centered with margin */
-    width: 80%; /* Adjust width as needed */
-    max-width: 500px; /* Max width for larger screens */
-    text-align: center; /* Center text */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Initial shadow for depth */
-    color: #fff; /* Text color */
-    border: 2px solid transparent; /* Transparent border initially */
-    transition: all 0.4s ease; /* Smooth transition for hover effect */
-    position: relative; /* For inner glow effect */
-    overflow: hidden; /* Hide the inner shadow overflow */
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect for the weather box */
+.weather-box:hover {
+  border-color: #00ffcc;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.8),
+    0 0 30px rgba(0, 255, 204, 0.6),
+    0 0 45px rgba(0, 255, 204, 0.4);
+  transform: scale(1.03);
+}
+
+/* Button styling */
+.animated-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 20px auto;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 9px #999;
+  display: block;
+  animation: pulse 2s infinite;
+  transition: all 0.3s ease;
+  max-width: 200px;
+}
+
+.animated-button:hover {
+  background-color: #45a049;
+  transform: scale(1.1);
+}
+
+.animated-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  
-  /* Hover effect for the weather box with a stronger glow */
-  .weather-box:hover {
-    border-color: #00ffcc; /* Border color changes to teal */
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.8), /* Outer glow */
-                0 0 30px rgba(0, 255, 204, 0.6), /* Larger outer glow */
-                0 0 45px rgba(0, 255, 204, 0.4); /* Further glowing effect */
-    transform: scale(1.03); /* Slight scale effect */
+  50% {
+    transform: scale(1.05);
   }
-  
-  /* Inner glow effect */
-  .weather-box:before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 255, 204, 0.3), transparent 70%);
-    z-index: -1;
-    transition: opacity 0.4s ease;
-    opacity: 0;
+  100% {
+    transform: scale(1);
   }
-  
-  .weather-box:hover:before {
-    opacity: 1; /* Show inner glow when hovered */
+}
+
+/* Loading screen styling */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  /* Styling for weather details */
-  .weather-box h3 {
-    font-size: 28px; /* Larger heading */
-    margin-bottom: 10px; /* Space below heading */
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .weather-box p {
-    font-size: 24px; /* Larger text for details */
-    margin: 5px 0; /* Space above and below text */
-  }
-  
-  /* Responsive design for smaller screens */
-  @media (max-width: 600px) {
-    .weather-box {
-      width: 95%; /* Full width on small screens */
-      padding: 10px; /* Adjust padding */
-    }
-  
-    .weather-box h3 {
-      font-size: 24px; /* Smaller heading */
-    }
-  
-    .weather-box p {
-      font-size: 20px; /* Smaller text */
-    }
-  }
-  
+}
